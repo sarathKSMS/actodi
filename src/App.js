@@ -1,34 +1,36 @@
-import Header from "./components/Header";
-import Card from "./components/card";
-import Todocontainer from "./components/Todocontainer"
-import Todolist from "./components/Todolist";
-import Todoform from "./components/Todoform";
-
+import { Route,Routes,BrowserRouter } from "react-router-dom";
+import Landing from "./pages/Landing";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import { useState } from "react";
 
 function App() {
+
+  const [users, setusers] = useState(
+    [
+      {
+        username: "sarath",
+        password: "123"
+      }
+    ]
+  )
+
+
   return (
-  <div className="bg-black p-10">
-    <div className="bg-white p-10 mx-4 border rounded-md">
-      {/* header */}
-      <Header></Header>
+  < div >
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Login users={users} setusers={setusers} />}></Route>
+        <Route path='/Signup' element={<Signup users={users} setusers={setusers} />}></Route>
+        <Route path='/Landing' element={<Landing/>}></Route>
+      </Routes>
+    </BrowserRouter>
 
-       {/* card */}
-      <div className="flex justify-between my-4 flex-wrap gap-7">
-      <Card bgColor={"#FFFF00"} title={"23 C"} subtitle={"Chennai"}/>
-      <Card bgColor={"#000080"} title={"10 May"} subtitle={"11.02.35"}/>
-      <Card bgColor={"#FFA500"} title={"Built Using "} subtitle={"React"}/>      
-      </div>
-
-      {/* Todocontainer */}
-      <Todocontainer></Todocontainer>
-      
+  </div>)
 
 
-
-
-    </div>
-  </div>
-  );
 }
 
-export default App;
+export default App
+
+
